@@ -1,4 +1,4 @@
-const firebaseURL = 'https://ejercicioajax-default-rtdb.europe-west1.firebasedatabase.app'; // Substitueix <TU_PROJECT_ID> pel teu projecte
+const firebaseURL = ''
 
 // Referencia a elementos del DOM
 const gameForm = document.getElementById('game-form');
