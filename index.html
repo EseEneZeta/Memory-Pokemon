@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PokeMemory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <div id="auth-container">
+    <div id="div-user-form">
+      <h1>¡Entrena tu memoria Pokémon!</h1>
+      <form id="user-form">
+        <div class="input-group">
+          <label for="username">Nombre de Entrenador:</label>
+          <input type="text" id="username" required placeholder="Ej: AshKetchum">
+        </div>
+        <div class="input-group">
+          <label for="email">Correo Pokémon:</label>
+          <input type="email" id="email" required placeholder="Ej: ash@liga.poke">
+        </div>
+        <button id="submit-btn" type="submit">Iniciar Aventura</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="game-container" class="hidden">
+    <div id="welcome" class="hidden">
+      <h1 id="welcomeTitle">¡Prepárate para combatir!</h1>
+    </div>
+
+    <div id="game" class="hidden">
+      <div id="game-header">
+        <div id="timer">00:00</div>
+        <button id="logout-btn">Cambiar Entrenador</button>
+      </div>
+      
+      <div id="game-content">
+        <div id="game-controls">
+          <form id="game-form">
+            <div class="input-group">
+              <label for="cards-number">Nivel de Dificultad:</label>
+              <select id="cards-number">
+                <option value="4">Principiante (4 cartas)</option>
+                <option value="8">Medio (8 cartas)</option>
+                <option value="12">Avanzado (12 cartas)</option>
+                <option value="16">Maestro Pokémon (16 cartas)</option>
+              </select>
+            </div>
+            <button id="play-btn">¡Empezar Combate!</button>
+          </form>
+        </div>
+
+        <div id="game-board"></div>
+      </div>
+
+      <div id="game-ranking">
+        <h2>🏆 Liga de Campeones</h2>
+        <table id="ranking">
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Entrenador</th>
+              <th>Mail</th>
+              <th>Tiempo</th>
+              <th>Cartas</th>
+            </tr>
+          </thead>
+          <tbody id="ranking-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="modal"></dialog>
+</body>
+</html>

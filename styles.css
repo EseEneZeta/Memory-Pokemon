@@ -1,0 +1,379 @@
+:root {
+    --primary-red: #ff1f1f;
+    --primary-yellow: #ffcc00;
+    --pokemon-blue: #3b4cca;
+    --background-light: #fff9e6;
+    --text-dark: #2a2a2a;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-yellow) 100%);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  @keyframes dissolveIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes cardFlip {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(90deg); }
+    100% { transform: rotateY(180deg); }
+  }
+  
+  /* Auth Container */
+  #auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    animation: dissolveIn 0.5s ease-out;
+  }
+  
+  #div-user-form {
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid var(--pokemon-blue);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  #div-user-form h1 {
+    color: var(--primary-red);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 0 var(--primary-yellow);
+  }
+  
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--pokemon-blue);
+    font-size: 0.8rem;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--primary-yellow);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: var(--primary-red);
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 31, 31, 0.3);
+  }
+  
+  /* Game Container */
+  #game-container {
+    min-height: 100vh;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+  
+  #game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 15px;
+    background: var(--primary-red);
+    border-radius: 10px;
+    color: white;
+  }
+  
+  #timer {
+    font-size: 1.2rem;
+    color: var(--primary-yellow);
+    text-shadow: 2px 2px 0 var(--pokemon-blue);
+  }
+  
+  /* Modificado: Nueva estructura del layout */
+  #game-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  #game-controls {
+    margin-bottom: 2rem;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--primary-yellow);
+    border-radius: 8px;
+    font-family: inherit;
+    background: white;
+    margin-bottom: 1rem;
+  }
+  
+  /* Tablero de juego modificado */
+  #game-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 236, 179, 0.3);
+    border-radius: 15px;
+    min-height: 400px;
+  }
+  
+  /* Nuevo sistema de cartas */
+  .card {
+    aspect-ratio: 1;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-back {
+    background: white url('img/card-back.png') center/cover;
+  }
+  
+  .card-front {
+    background: white;
+    transform: rotateY(180deg);
+    padding: 5px;
+  }
+  
+  .card.flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .card.matched {
+    transform: scale(0.95);
+    filter: brightness(1.1);
+    box-shadow: 0 0 20px #4caf50;
+  }
+  
+  .card img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+  }
+  
+  /* Ranking modificado */
+  #game-ranking {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  #ranking {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  #ranking th {
+    background: linear-gradient(45deg, var(--primary-red), var(--primary-yellow));
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.8rem;
+  }
+  
+  #ranking td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.7rem;
+  }
+  
+  #ranking tr:nth-child(even) {
+    background: rgba(255, 241, 118, 0.1);
+  }
+  
+  #ranking tr:hover td {
+    background: rgba(255, 241, 118, 0.2);
+  }
+  
+  /* Botones */
+  button {
+    background: linear-gradient(45deg, var(--primary-red), var(--primary-yellow));
+    border: none;
+    padding: 12px 25px;
+    color: white;
+    font-family: inherit;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 31, 31, 0.4);
+  }
+  
+  button:active {
+    transform: translateY(0);
+  }
+  
+  /* Modal */
+  #modal {
+    background: white;
+    border: 3px solid var(--primary-red);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--primary-red);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    #game-content {
+      grid-template-columns: 1fr;
+    }
+  
+    #game-ranking {
+      order: -1;
+    }
+  
+    #div-user-form h1 {
+      font-size: 1.2rem;
+    }
+  
+    button {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .card {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    /* Layout para pantallas grandes */
+    #game-content {
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+    }
+    
+    #game-controls {
+      grid-row: 1;
+    }
+    
+    #game-board {
+      grid-row: 2;
+      grid-column: 1;
+    }
+    
+    #game-ranking {
+      grid-row: 1 / span 2;
+      grid-column: 2;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #game-header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    #timer {
+      order: -1;
+    }
+  }
+  
+  /* Efectos especiales */
+  #welcome {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  
+  #welcomeTitle {
+    font-family: 'Pokemon Solid', sans-serif;
+    color: var(--primary-yellow);
+    text-shadow: 4px 4px 0 var(--pokemon-blue);
+    animation: float 3s ease-in-out infinite;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  
+  .highlight {
+    animation: highlight 1.5s ease-out;
+  }
+  
+  @keyframes highlight {
+    0% { background-color: #fff59d; }
+    100% { background-color: transparent; }
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 204, 0, 0.1);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary-red), var(--primary-yellow));
+    border-radius: 10px;
+  }
+  
